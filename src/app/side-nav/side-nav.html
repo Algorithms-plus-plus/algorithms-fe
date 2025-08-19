@@ -1,0 +1,52 @@
+
+<div class="accordion accordion-flush" [id]="newParentId()" appAccordionDropdownDirective>
+
+    @for (chapter of currentChapters(); track chapter.id) {
+        @if (!!chapter.nextLevel) {
+            <div class="accordion-item">
+                <h2 class="accordion-header" [id]="newHeaderId() + chapter.id">
+                    <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#' + newChapterId() + chapter.id"
+                        aria-expanded="false"
+                        [attr.aria-controls]="newChapterId() + chapter.id"
+                    >
+                        {{chapter.name}}
+                    </button>
+                </h2>
+                <div
+                [id]="newChapterId() + chapter.id"
+                class="accordion-collapse collapse"
+                [attr.aria-labelledby]="newHeaderId() + chapter.id"
+                [attr.data-bs-parent]="'#' + newParentId()"
+                >
+                    <div class="accordion-body">
+                        <ng-container>
+                            @if (!!chapter.nextLevel) {
+                                <app-side-nav [level]="level() + 1" 
+                                                [currentChapters]="chapter.nextLevel" 
+                                                [parentId]="newParentId()" 
+                                                [headerId]="newHeaderId() + chapter.id"
+                                                [chapterId]="newChapterId() + chapter.id"></app-side-nav>
+                            } @else {
+                                <!-- <div>todo</div> -->
+                            }
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        } @else {
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button no-arrow"
+                    >
+                        {{chapter.name}}
+                    </button>
+                </h2>
+            </div>
+        }
+    }
+</div>
