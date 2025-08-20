@@ -1,5 +1,5 @@
 import { Chapter } from "./chapter";
-import { chapter1 } from "./chapter1";
+import { chapter1 } from "../../chapter1/TOC";
 
 
 export const chapters:Chapter[] = [

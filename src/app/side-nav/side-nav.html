@@ -41,7 +41,8 @@
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button
-                        class="accordion-button no-arrow"
+                        class="accordion-button point"
+                        [routerLink]="chapter.navigate" routerLinkActive="active"
                     >
                         {{chapter.name}}
                     </button>

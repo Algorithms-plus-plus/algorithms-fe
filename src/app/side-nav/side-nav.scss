@@ -8,5 +8,22 @@
         &::after {
             display: none;
         }
+
+        // &::before {
+        //     // display: list-item;
+        //     content: '▶';
+        // }
+    }
+
+    &.point {
+        &::after {
+            display: none;
+        }
+
+        &::before {
+            padding-right: 1vh;
+            // display: list-item;
+            content: '•';
+        }
     }
 }

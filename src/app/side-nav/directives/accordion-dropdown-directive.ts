@@ -14,13 +14,14 @@ export class AccordionDropdownDirective {
     @HostListener('click', ['$event'])
     toggle(event: MouseEvent): void {
         // event.preventDefault();
-        event.stopPropagation();
         const button = (event.target as HTMLElement).closest('.accordion-button');
         // debugger;
         if (!button) return;
-
+        if (button.classList.contains('point')) return;
         const collapseId = button.getAttribute('data-bs-target');
         if (!collapseId) return;
+
+        event.stopPropagation();
 
         const collapseElement = this.elementRef.nativeElement.querySelector(collapseId);
 
