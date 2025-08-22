@@ -11,13 +11,19 @@ import { log } from 'console';
 @Injectable({ providedIn: 'root' })
 export class SetService {
   
-    private apiUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl + '/sets/';
     private http = inject(HttpClient);
     
     // Example method to demonstrate service functionality
     getSets(body: SetRequest): Observable<SetResponse> {
         // This would typically make an HTTP request to the backend API
         console.log('Fetching sets from:', this.apiUrl);
-        return this.http.post<SetResponse>(this.apiUrl + '/sets/definitions', body, {responseType: 'json'}); // Placeholder for actual data fetching logic
+        return this.http.post<SetResponse>(this.apiUrl + 'definitions', body, {responseType: 'json'}); // Placeholder for actual data fetching logic
+    }
+
+    getSymmetricDifferenceSets(body: SetRequest): Observable<Set<number>> {
+        // This would typically make an HTTP request to the backend API
+        console.log('Fetching sets from:', this.apiUrl);
+        return this.http.post<Set<number>>(this.apiUrl + 'symmetric-difference', body, {responseType: 'json'}); // Placeholder for actual data fetching logic
     }
 }

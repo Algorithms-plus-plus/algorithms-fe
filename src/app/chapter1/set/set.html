@@ -9,7 +9,7 @@
     <a class="nav-link" aria-current="page" (click)="activeTab = 'task2'" [class.active] = "activeTab == 'task2'">Task 2</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" aria-current="page" (click)="activeTab = 'task3'" [class.active] = "activeTab == 'task3'">Task 3</a>
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -19,10 +19,56 @@
     @switch (activeTab) {
         @case ('task1') {
             <div>
-                <h2>Task1</h2>
+                <h2>Task 1</h2>
                 <p>Set A and set B are given. Find the result set from set A⋃B, A⋂B, A\B and B\A.</p>
             </div>
-            <form [formGroup]="setsGroup" (ngSubmit)="onSubmit()">
+            <form [formGroup]="setsGroup" (ngSubmit)="onSubmitBaseDefinitions()">
+                <div class="row justify-content-around">
+                    <div class="col-5" class="form-group">
+                        <label for="setA">Set A</label>
+                        <input type="text" class="form-control" id="setA" aria-describedby="setAHelp" placeholder="Enter set A" formControlName="set1">
+                        <small id="setAHelp" class="form-text text-muted">Example: 1,2,4,5,7</small>
+                    </div>
+                    <div class="col-5" class="form-group">
+                        <label for="setB">Set B</label>
+                        <input type="text" class="form-control" id="setB" aria-describedby="setBHelp" placeholder="Enter set B" formControlName="set2">
+                        <small id="setBHelp" class="form-text text-muted">Example: 2,3,4,5,6</small>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!setsGroup.valid" class="btn" 
+                    [ngClass]="setsGroup.valid ? 'btn-primary' : 'btn-secondary'" >Submit</button>
+            </form>
+            <div class="mt-3">
+            <h3>Result</h3>
+                <ng-container>
+                    @if (baseDefinitionsResponse$() !== undefined) {
+                        <div>
+                            <p><strong>A is subset of B:</strong> {{ baseDefinitionsResponse$()?.subset }}</p>
+                            <p><strong>Union (A ⋃ B):</strong> {{ baseDefinitionsResponse$()?.union }}</p>
+                            <p><strong>Intersection (A ⋂ B):</strong> {{ baseDefinitionsResponse$()?.intersection }}</p>
+                            <p><strong>Difference (A / B):</strong> {{ baseDefinitionsResponse$()?.diff1 }}</p>
+                            <p><strong>Difference (B / A):</strong> {{ baseDefinitionsResponse$()?.diff2 }}</p>
+                        </div>
+                    }
+                </ng-container>
+            </div>
+        } @case ('task2') {
+            <div>
+                <h2>Task 2</h2>
+                <p>For set A and set B is known that <strong>A ∩ B = A</strong>. What can you say for set B?</p>
+            </div>
+            <div class="mt-3">
+                <h3>Result</h3>
+                <div>
+                    <p>B is also superset of A. A ∩ B = A ⟺ A ⊆ B. So either B=A or A⊊B (proper subset). If A=∅, this holds for any B.</p>
+                </div>
+            </div>
+        } @case ('task3') {
+            <div>
+                <h2>Task 3</h2>
+                <p>Find the symmetric difference of two sets: A⊕B=(A⋃B)/(A⋂B)</p>
+            </div>
+            <form [formGroup]="setsGroup" (ngSubmit)="onSubmitSymmetricDifference()">
                 <div class="row justify-content-around">
                     <div class="col-5" class="form-group">
                         <label for="setA">Set A</label>
@@ -41,27 +87,12 @@
             <div class="mt-3">
             <h3>Result</h3>
             <ng-container>
-                @if (response$() !== undefined) {
+                @if (symmetricResponse$() !== undefined) {
                     <div>
-                        <p><strong>A is subset of B:</strong> {{ response$()?.subset }}</p>
-                        <p><strong>Union (A ∪ B):</strong> {{ response$()?.union }}</p>
-                        <p><strong>Intersection (A ∩ B):</strong> {{ response$()?.intersection }}</p>
-                        <p><strong>Difference (A / B):</strong> {{ response$()?.diff1 }}</p>
-                        <p><strong>Difference (B / A):</strong> {{ response$()?.diff2 }}</p>
+                        <p><strong>A⊕B=</strong> {{ symmetricResponse$() }}</p>
                     </div>
                 }
             </ng-container>
-            </div>
-        } @case ('task2') {
-            <div>
-                <h2>Task2</h2>
-                <p>For set A and set B is known that <strong>A ∩ B = A</strong>. What can you say for set B?</p>
-            </div>
-            <div class="mt-3">
-                <h3>Result</h3>
-                <div>
-                    <p>B is also superset of A. A ∩ B = A ⟺ A ⊆ B. So either B=A or A⊊B (proper subset). If A=∅, this holds for any B.</p>
-                </div>
             </div>
         }
         @default {
