@@ -12,7 +12,7 @@
     <a class="nav-link" aria-current="page" (click)="activeTab = 'task3'" [class.active] = "activeTab == 'task3'">Task 3</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <a class="nav-link" aria-current="page" (click)="activeTab = 'task4'" [class.active] = "activeTab == 'task4'">Task 4</a>
   </li>
 </ul>
 <div class="tab-content">
@@ -93,6 +93,24 @@
                     </div>
                 }
             </ng-container>
+            </div>
+        } @case ('task4') {
+            <div>
+                <h2>Task 4</h2>
+                <p>An operation is symmetric when <strong>A • B = B • A</strong>. What of the following operations are symmetric:</p>
+                <ul>
+                    <li>Union (A ⋃ B)</li>
+                    <li>Intersection (A ⋂ B)</li>
+                    <li>Difference (A / B)</li>
+                    <li>Difference (B / A)</li>
+                    <li>Symmetric Difference (A ⊕ B)</li>
+                </ul>
+            </div>
+            <div class="mt-3">
+                <h3>Result</h3>
+                <div>
+                    <p>Union, intersection and symmetric difference.</p>
+                </div>
             </div>
         }
         @default {
