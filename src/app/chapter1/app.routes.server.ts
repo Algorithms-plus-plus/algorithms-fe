@@ -4,7 +4,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 export const serverRoutes: Routes = [
   {
     path: 'sets',
-    loadComponent: () => import('./set/set').then(m => m.Set),
+    loadComponent: () => import('./set/set').then(m => m.SetComponent),
     title: 'Sets',
   }
 ];
