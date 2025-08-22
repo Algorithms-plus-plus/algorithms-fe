@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration development --proxy-config proxy.conf.json",
     "test": "ng test",
+    "start:dev": "ng serve --configuration=development --proxy-config proxy.conf.json",
     "serve:ssr:algorithms": "node dist/algorithms/server/server.mjs"
   },
   "prettier": {
