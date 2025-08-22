@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SetService } from './services/set-service';
-import { response } from 'express';
-import { error } from 'console';
-import { Observable } from 'rxjs';
 import { SetResponse } from './models/set-response';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-set',
@@ -18,9 +15,11 @@ import { toObservable } from '@angular/core/rxjs-interop';
 export class SetComponent implements OnInit {
 
   setService = inject(SetService);
-  response!: SetResponse;
+  destroyRef = inject(DestroyRef);
+  // response!: SetResponse;
+  response$ = signal<SetResponse | undefined>(undefined);
 
-  response$!: Observable<SetResponse>;
+  // response$!: Observable<SetResponse>;
 
   setsGroup = new FormGroup({
       set1: new FormControl('1,2,4,5,7', {
@@ -36,7 +35,6 @@ export class SetComponent implements OnInit {
   activeTab: string = 'task1';
 
   ngOnInit() {
-    // Initialization logic if needed
   }
 
   onSubmit() {
@@ -48,17 +46,20 @@ export class SetComponent implements OnInit {
       const set1 = s1.split(',').map(item => +item.trim());
       const set2 = s2.split(',').map(item => +item.trim());
 
-      this.response$ = this.setService.getSets({ set1: set1, set2: set2 });
+      // this.response$ = this.setService.getSets({ set1: set1, set2: set2 });
 
-      // this.setService.getSets({ set1: set1, set2: set2 }).subscribe({
-      //   next: (response: SetResponse) => {
-      //     console.log('Response received:', response)
-      //     this.response = response;
-      //   },
-      //   error: (error) => {
-      //     console.error('Error fetching sets:', error);
-      //   }
-      // });
+      this.setService.getSets({ set1: set1, set2: set2 })
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (response: SetResponse) => {
+            console.log('Response received:', response)
+            // this.response = response;
+            this.response$.set(response);
+          },
+          error: (error) => {
+            console.error('Error fetching sets:', error);
+          }
+        });
     }
 
   }
