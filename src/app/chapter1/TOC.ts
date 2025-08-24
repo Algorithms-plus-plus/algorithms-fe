@@ -14,8 +14,8 @@ export const chapter1:Chapter =
                         id: 1, 
                         name: 'Basic Math Definitions', 
                         nextLevel: [
-                            { id: 1, name: 'Sets' , navigate: ['chapter1', 'sets'] },
-                            { id: 2, name: 'Numbers' },
+                            { id: 1, name: 'Sets', navigate: ['chapter1', 'sets'] },
+                            { id: 2, name: 'Numbers', navigate: ['chapter1', 'numbers'] },
                             { id: 3, name: 'Modulus' },
                             { id: 4, name: 'Sum and Product' },
                             { id: 5, name: 'Power, logN and sqrt' },
