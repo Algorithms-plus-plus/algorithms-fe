@@ -1,0 +1,117 @@
+<div>
+    <h1>Modulo</h1>
+</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" (click)="activeTab = 'task1'" [class.active] = "activeTab == 'task1'">Task 1</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" (click)="activeTab = 'task2'" [class.active] = "activeTab == 'task2'">Task 2</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" (click)="activeTab = 'task3'" [class.active] = "activeTab == 'task3'">Task 3</a>
+  </li>
+</ul>
+<div class="tab-content">
+    @switch (activeTab) {
+        @case ('task1') {
+            <div>
+                <h2>Task 1</h2>
+                <p>Find</p>
+            </div>
+            <form [formGroup]="moduloGroup" (ngSubmit)="calculateModulo()">
+                <div class="row justify-content-around">
+                    <div class="col-5" class="form-group">
+                        <label for="dividend">Dividend</label>
+                        <input type="number" class="form-control" id="dividend" aria-describedby="dividend" placeholder="Enter dividend" formControlName="dividend">
+                        <small id="dividend" class="form-text text-muted">Example: 5</small>
+                    </div>
+                    <div class="col-5" class="form-group">
+                        <label for="divisor">Divisor</label>
+                        <input type="number" class="form-control" id="divisor" aria-describedby="divisor" placeholder="Enter divisor" formControlName="divisor">
+                        <small id="divisor" class="form-text text-muted">Example: 3</small>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!moduloGroup.valid" class="btn" 
+                    [ngClass]="moduloGroup.valid ? 'btn-primary' : 'btn-secondary'" >Calculate</button>
+            </form>
+            <div class="mt-3">
+            <h3>Result</h3>
+            <ng-container>
+                    <div>
+                        @if (reminder() !== undefined) {
+                            <p><strong>Reminder:</strong> {{ reminder() }}</p>
+                        }
+                        @if (quotient() !== undefined) {
+                            <p><strong>Quotient:</strong> {{ quotient() }}</p>
+                        }
+                    </div>
+                </ng-container>
+            </div>
+        } 
+        <!-- @case ('task2') {
+            <div>
+                <h2>Task 2</h2>
+                <p>For set A and set B is known that <strong>A ∩ B = A</strong>. What can you say for set B?</p>
+            </div>
+            <div class="mt-3">
+                <h3>Result</h3>
+                <div>
+                    <p>B is also superset of A. A ∩ B = A ⟺ A ⊆ B. So either B=A or A⊊B (proper subset). If A=∅, this holds for any B.</p>
+                </div>
+            </div>
+        } @case ('task3') {
+            <div>
+                <h2>Task 3</h2>
+                <p>Find the symmetric difference of two sets: A⊕B=(A⋃B)/(A⋂B)</p>
+            </div>
+            <form [formGroup]="setsGroup" (ngSubmit)="onSubmitSymmetricDifference()">
+                <div class="row justify-content-around">
+                    <div class="col-5" class="form-group">
+                        <label for="setA">Set A</label>
+                        <input type="text" class="form-control" id="setA" aria-describedby="setAHelp" placeholder="Enter set A" formControlName="set1">
+                        <small id="setAHelp" class="form-text text-muted">Example: 1,2,4,5,7</small>
+                    </div>
+                    <div class="col-5" class="form-group">
+                        <label for="setB">Set B</label>
+                        <input type="text" class="form-control" id="setB" aria-describedby="setBHelp" placeholder="Enter set B" formControlName="set2">
+                        <small id="setBHelp" class="form-text text-muted">Example: 2,3,4,5,6</small>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!setsGroup.valid" class="btn" 
+                    [ngClass]="setsGroup.valid ? 'btn-primary' : 'btn-secondary'" >Submit</button>
+            </form>
+            <div class="mt-3">
+            <h3>Result</h3>
+            <ng-container>
+                @if (symmetricResponse$() !== undefined) {
+                    <div>
+                        <p><strong>A⊕B=</strong> {{ symmetricResponse$() }}</p>
+                    </div>
+                }
+            </ng-container>
+            </div>
+        } @case ('task4') {
+            <div>
+                <h2>Task 4</h2>
+                <p>An operation is symmetric when <strong>A • B = B • A</strong>. What of the following operations are symmetric:</p>
+                <ul>
+                    <li>Union (A ⋃ B)</li>
+                    <li>Intersection (A ⋂ B)</li>
+                    <li>Difference (A / B)</li>
+                    <li>Difference (B / A)</li>
+                    <li>Symmetric Difference (A ⊕ B)</li>
+                </ul>
+            </div>
+            <div class="mt-3">
+                <h3>Result</h3>
+                <div>
+                    <p>Union, intersection and symmetric difference.</p>
+                </div>
+            </div>
+        } -->
+        @default {
+            <h2>Not implemented</h2>
+        }
+    }
+</div>

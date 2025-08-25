@@ -10,6 +10,11 @@ export const serverRoutes: Routes = [
   {
     path: 'numbers',
     loadComponent: () => import('./base-definitions/numbers/numbers').then(m => m.Numbers),
-    title: 'Sets',
+    title: 'Numbers',
+  },
+  {
+    path: 'modulo',
+    loadComponent: () => import('./base-definitions/modulo/modulo').then(m => m.Modulo),
+    title: 'Modulo',
   }
 ];
