@@ -61,57 +61,30 @@
                         The only multiply of m whose absolute value is &lt; |m| is 0. Hence r' = r, and then q = q'.</p>
                 </div>
             </div>
-        } 
-          <!--  @case ('task3') {
+        } @case ('task3') {
             <div>
                 <h2>Task 3</h2>
-                <p>Find the symmetric difference of two sets: A⊕B=(A⋃B)/(A⋂B)</p>
-            </div>
-            <form [formGroup]="setsGroup" (ngSubmit)="onSubmitSymmetricDifference()">
-                <div class="row justify-content-around">
-                    <div class="col-5" class="form-group">
-                        <label for="setA">Set A</label>
-                        <input type="text" class="form-control" id="setA" aria-describedby="setAHelp" placeholder="Enter set A" formControlName="set1">
-                        <small id="setAHelp" class="form-text text-muted">Example: 1,2,4,5,7</small>
-                    </div>
-                    <div class="col-5" class="form-group">
-                        <label for="setB">Set B</label>
-                        <input type="text" class="form-control" id="setB" aria-describedby="setBHelp" placeholder="Enter set B" formControlName="set2">
-                        <small id="setBHelp" class="form-text text-muted">Example: 2,3,4,5,6</small>
-                    </div>
-                </div>
-                <button type="submit" [disabled]="!setsGroup.valid" class="btn" 
-                    [ngClass]="setsGroup.valid ? 'btn-primary' : 'btn-secondary'" >Submit</button>
-            </form>
-            <div class="mt-3">
-            <h3>Result</h3>
-            <ng-container>
-                @if (symmetricResponse$() !== undefined) {
-                    <div>
-                        <p><strong>A⊕B=</strong> {{ symmetricResponse$() }}</p>
-                    </div>
-                }
-            </ng-container>
-            </div>
-        } @case ('task4') {
-            <div>
-                <h2>Task 4</h2>
-                <p>An operation is symmetric when <strong>A • B = B • A</strong>. What of the following operations are symmetric:</p>
-                <ul>
-                    <li>Union (A ⋃ B)</li>
-                    <li>Intersection (A ⋂ B)</li>
-                    <li>Difference (A / B)</li>
-                    <li>Difference (B / A)</li>
-                    <li>Symmetric Difference (A ⊕ B)</li>
-                </ul>
+                <p>Propose algorithm fr finding the number of digits in a real number. What problems can occur?</p>
             </div>
             <div class="mt-3">
                 <h3>Result</h3>
                 <div>
-                    <p>Union, intersection and symmetric difference.</p>
+                    <p>Probably the easiest way would be to get the number of digits via regex. </p>
+                    GhatGPT:
+                    <ul>
+                        <li>For non-negative digits(n) = lg<sup>n</sup> + 1. Overflow if n is very large. Floating point can introduce off-by-one errors near power of 10 - might return 2.9999 instead of 3</li>
+                        <li>Real numbers with fractional part. We must specify a precision (number of decimal places to count), because real numbers often have infinite expansions in decimal.</li>
+                        <li>Floating-point representation. Real numbers in computers are stored in finite binary floating-point. Problems: 
+                            <ul>
+                                <li>Many decimals are not exactly representable</li>
+                                <li>Rounding errors cause ambiguity in digit counting.</li>
+                                <li>Very large or small numbers are stored in scientific notation, so raw digit count isn’t well-defined without converting to a decimal string at some precision.</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        } -->
+        }
         @default {
             <h2>Not implemented</h2>
         }

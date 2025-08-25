@@ -24,7 +24,6 @@ export class AccordionDropdownDirective implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        console.log('TTT constructor');
         this.router.events
         .pipe(
             filter(event => event instanceof NavigationEnd),
