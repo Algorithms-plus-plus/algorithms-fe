@@ -19,7 +19,7 @@ export const chapter1:Chapter =
                             { id: 3, name: 'Modulo', navigate: ['chapter1', 'modulo'] },
                             { id: 4, name: 'Sum and Product', navigate: ['chapter1', 'sum-product'] },
                             { id: 5, name: 'Power, logN and sqrt', navigate: ['chapter1', 'power-log-sqrt'] },
-                            { id: 6, name: 'Factorials and Recursion' },
+                            { id: 6, name: 'Factorials and Recurrent Functions', navigate: ['chapter1', 'factorials-recurrent']  },
                             { id: 7, name: 'Metrics' }
                         ] 
                     },
