@@ -17,7 +17,7 @@ export const chapter1:Chapter =
                             { id: 1, name: 'Sets', navigate: ['chapter1', 'sets'] },
                             { id: 2, name: 'Numbers', navigate: ['chapter1', 'numbers'] },
                             { id: 3, name: 'Modulo', navigate: ['chapter1', 'modulo'] },
-                            { id: 4, name: 'Sum and Product' },
+                            { id: 4, name: 'Sum and Product', navigate: ['chapter1', 'sum-product'] },
                             { id: 5, name: 'Power, logN and sqrt' },
                             { id: 6, name: 'Factorials and Recursion' },
                             { id: 7, name: 'Metrics' }

@@ -16,5 +16,10 @@ export const serverRoutes: Routes = [
     path: 'modulo',
     loadComponent: () => import('./base-definitions/modulo/modulo').then(m => m.Modulo),
     title: 'Modulo',
+  },
+  {
+    path: 'sum-product',
+    loadComponent: () => import('./base-definitions/sum/sum').then(m => m.Sum),
+    title: 'Sum and Product',
   }
 ];
