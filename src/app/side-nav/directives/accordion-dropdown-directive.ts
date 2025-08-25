@@ -38,9 +38,7 @@ export class AccordionDropdownDirective implements AfterViewInit {
             // https://angular.io/api/router/NavigationCancel
             // https://angular.io/api/router/NavigationError
             const currentPath = event.urlAfterRedirects.split('/').slice(1);
-            console.log('TTT', currentPath);
             const sectionPath = this.getSectionPath(this.currentChapters(), currentPath, []);
-            console.log('TTT - ', sectionPath);
             sectionPath.forEach(section => this.toggleByText(section));
         });
     }
