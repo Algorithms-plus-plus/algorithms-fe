@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SetService } from './services/set-service';
 import { SetResponse } from './models/set-response';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-set',
@@ -19,6 +20,9 @@ export class SetComponent implements OnInit {
   // response!: SetResponse;
   baseDefinitionsResponse$ = signal<SetResponse | undefined>(undefined);
   symmetricResponse$ = signal<Set<number> | undefined>(undefined);
+
+  title = signal('');
+  activateRoute = inject(ActivatedRoute);
 
   // response$!: Observable<SetResponse>;
 
@@ -36,6 +40,7 @@ export class SetComponent implements OnInit {
   activeTab: string = 'task1';
 
   ngOnInit() {
+    this.title.set( (this.activateRoute.snapshot.routeConfig?.title as string) || '');
   }
 
   onSubmitBaseDefinitions() {

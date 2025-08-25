@@ -2,16 +2,20 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-sum',
+  selector: 'app-power-log-sqrt',
   imports: [],
-  templateUrl: './sum.html',
-  styleUrl: './sum.scss'
+  templateUrl: './power-log-sqrt.html',
+  styleUrl: './power-log-sqrt.scss'
 })
-export class Sum implements OnInit {
+export class PowerLogSqrt implements OnInit {
+
   title = signal('');
+  
   activateRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.title.set( (this.activateRoute.snapshot.routeConfig?.title as string) || '');
   }
+
+
 }

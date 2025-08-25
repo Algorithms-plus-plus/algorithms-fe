@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modulus',
@@ -8,11 +9,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './modulo.html',
   styleUrl: './modulo.scss'
 })
-export class Modulo {
+export class Modulo implements OnInit {
 
+  title = signal('');
   activeTab: string = 'task1';
   reminder = signal<number | undefined>(undefined);
   quotient = signal<number | undefined>(undefined);
+  activateRoute = inject(ActivatedRoute);
 
   moduloGroup = new FormGroup({
       dividend: new FormControl(5, {
@@ -24,6 +27,10 @@ export class Modulo {
         validators: [Validators.required, Validators.pattern(/^\d+/)]
       })
   });
+
+  ngOnInit(): void {
+    this.title.set( (this.activateRoute.snapshot.routeConfig?.title as string) || '');
+  }
 
 
   calculateModulo() {

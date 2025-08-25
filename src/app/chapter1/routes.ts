@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: Routes = [
   {
@@ -21,5 +20,10 @@ export const serverRoutes: Routes = [
     path: 'sum-product',
     loadComponent: () => import('./base-definitions/sum/sum').then(m => m.Sum),
     title: 'Sum and Product',
+  },
+  {
+    path: 'power-log-sqrt',
+    loadComponent: () => import('./base-definitions/power-log-sqrt/power-log-sqrt').then(m => m.PowerLogSqrt),
+    title: 'Power, logN and sqrt',
   }
 ];
